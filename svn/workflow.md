@@ -38,37 +38,52 @@ $ svn co  http://svn.dafiti.com.mx/upgrade/4.2.0/branches/MXDAFITI-#
 #Synchronize the local branch with the trunk
 
 4.2 Version
-svn merge -x -w -x -b -x --ignore-eol-style http://svn.dafiti.com.mx/upgrade/4.2.0/trunk/
-svn ci -m 'MXDAFITI-#: merged from trunk'
-It is important to use -x -w -x -b -x --ignore-eol-style (ignore whitespace, ignore binary, ignore line-endings) in order to prevent merge conflicts.
-Reintegrate the project branch into the trunk
+```sh
+$ svn merge -x -w -x -b -x --ignore-eol-style http://svn.dafiti.com.mx/upgrade/4.2.0/trunk/
+$ svn ci -m 'MXDAFITI-#: merged from trunk'
+```
+**It is important to use -x -w -x -b -x --ignore-eol-style (ignore whitespace, ignore binary, ignore line-endings) in order to prevent merge conflicts.**
+
+
+#Reintegrate the project branch into the trunk
 
 First of all we have to switch the local working copy to the trunk
 
 4.2 Version
-svn switch http://svn.dafiti.com.mx/upgrade/4.2.0/trunk/
-It is VERY important, that the local working copy is up-to-date!
+```sh
+$ svn switch http://svn.dafiti.com.mx/upgrade/4.2.0/trunk/
+```
+**It is VERY important, that the local working copy is up-to-date!**
+
 Now reintegrate the branch into the trunk to which you've just switched
 
 4.2 Version
-svn merge --reintegrate -x -w -x -b -x --ignore-eol-style http://svn.dafiti.com.mx/upgrade/4.2.0/branches/MXDAFITI-#
-svn revert bob/application/vendor/configs/_crontab
-svn ci -m 'MXDAFITI-#: reintegrated branch BRANCH-DESCRIPTION'
+```sh
+$ svn merge --reintegrate -x -w -x -b -x --ignore-eol-style http://svn.dafiti.com.mx/upgrade/4.2.0/branches/MXDAFITI-#
+$ svn revert bob/application/vendor/configs/_crontab
+$ svn ci -m 'MXDAFITI-#: reintegrated branch BRANCH-DESCRIPTION'
+# Committed revision 1234.
+```
 
-Committed revision 1234.
 
-Google Analytics Notes:'
-If your changes were important modifications (new mobile web launch, IT issues, marketing events), please make notes @ Google Analytics regardignt this big/medium changes. Or ask to someone with access to do it.
+###Google Analytics Notes:'
+>If your changes were important modifications (new mobile web launch, IT issues, marketing events), please make notes @ >Google Analytics regardignt this big/medium changes. Or ask to someone with access to do it.
+
+
 Usually you do not use this branch again. E.g. after the end of a sprint the branch gets reintegrated into the trunk and then deleted or marked as finished. Bugfixes should be done in a bugfix branch named after the bug ticket - e.g. MXDAFITI-2. If the bug got fixed you must reintegrate this bugfix branch back into the trunk.
 
 4.2 Version
-svn rm http://svn.dafiti.com.mx/upgrade/4.2.0/branches/MXDAFITI-# -m 'MXDAFITI-#: removed branch after reintegration'
-Deleted branches are keept in SVN as part of the project, so even if they are deleted they can be brought back to life.
-Warning Warning:	Do not use the branch again!
-It is not recommended to merge from a branch to the trunk after reintegration and the branch should be deleted after reintegration.
-Stackoverflow discussion regarding dead branches
-If you need to make changes to the branch after reintegration, you will have to create a new branch from trunk. Name it like the first branch with a postfix like e.g. '_bugfix'.
-Undoing a faulty commit
+```sh
+$ svn rm http://svn.dafiti.com.mx/upgrade/4.2.0/branches/MXDAFITI-# -m 'MXDAFITI-#: removed branch after reintegration'
+```
+[Deleted branches are keept in SVN as part of the project, so even if they are deleted they can be brought back to life.](http://stackoverflow.com/questions/102472/subversion-branch-reintegration)
+
+>*Warning Warning:	Do not use the branch again!*
+>It is not recommended to merge from a branch to the trunk after reintegration and the branch should be deleted after >reintegration.
+>Stackoverflow discussion regarding dead branches
+>If you need to make changes to the branch after reintegration, you will have to create a new branch from trunk. Name it >like the first branch with a postfix like e.g. '_bugfix'.
+
+#Undoing a faulty commit
 
 If you ever want to undo a commit you have to reverse merge from the target you commited to, to your working copy. From your working directory do the following:
 svn merge -c -[FAULTY_REVISION_NUMBER] http://svn.dafiti.com.mx/dafiti/MXDAFITI/branches/MXDAFITI-#
