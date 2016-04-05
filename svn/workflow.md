@@ -78,22 +78,33 @@ $ svn rm http://svn.dafiti.com.mx/upgrade/4.2.0/branches/MXDAFITI-# -m 'MXDAFITI
 ```
 [Deleted branches are keept in SVN as part of the project, so even if they are deleted they can be brought back to life.](http://stackoverflow.com/questions/102472/subversion-branch-reintegration)
 
->*Warning Warning:	Do not use the branch again!*
+>**Warning:	Do not use the branch again!**
 >It is not recommended to merge from a branch to the trunk after reintegration and the branch should be deleted after >reintegration.
->Stackoverflow discussion regarding dead branches
->If you need to make changes to the branch after reintegration, you will have to create a new branch from trunk. Name it >like the first branch with a postfix like e.g. '_bugfix'.
+
+>[Stackoverflow discussion regarding dead branches](http://stackoverflow.com/questions/102472/subversion-branch-reintegration)
+
+>If you need to make changes to the branch after reintegration, you will have to create a new branch from trunk. Name it like the first branch with a postfix like e.g. '_bugfix'.
 
 #Undoing a faulty commit
 
 If you ever want to undo a commit you have to reverse merge from the target you commited to, to your working copy. From your working directory do the following:
-svn merge -c -[FAULTY_REVISION_NUMBER] http://svn.dafiti.com.mx/dafiti/MXDAFITI/branches/MXDAFITI-#
-svn ci -m '[JIRA ISSUE]: reverse merged to undo revision [FAULTY_REVISION_NUMBER]'
-If you want to undo a range of revisions you can do the following:
-svn merge -r [FAULTY_REVISION_NUMBER_START]:[FAULTY_REVISION_NUMBER_END] http://svn.dafiti.com.mx/dafiti/MXDAFITI/branches/MXDAFITI-#
-svn ci -m 'MXDAFITI-#: reverse merged to undo revisions [FAULTY_REVISION_NUMBER_START] to [FAULTY_REVISION_NUMBER_END]'
+```sh
+$ svn merge -c -[FAULTY_REVISION_NUMBER] http://svn.dafiti.com.mx/dafiti/MXDAFITI/branches/MXDAFITI-#
+$ svn ci -m '[JIRA ISSUE]: reverse merged to undo revision [FAULTY_REVISION_NUMBER]'
+```
 
-Adding files to SVN in command line
+If you want to undo a range of revisions you can do the following:
+```sh
+$ svn merge -r [FAULTY_REVISION_NUMBER_START]:[FAULTY_REVISION_NUMBER_END]
+$ svn ci -m '[JIRA ISSUE]: reverse merged to undo revision [FAULTY_REVISION_NUMBER]' http://svn.dafiti.com.mx/dafiti/MXDAFITI/branches/MXDAFITI-#
+$ svn ci -m 'MXDAFITI-#: reverse merged to undo revisions [FAULTY_REVISION_NUMBER_START] to [FAULTY_REVISION_NUMBER_END]'
+```
+
+#Adding files to SVN in command line
 
 If you want to add all files recursively from your current dir do the following:
-svn add --force ./*
+```sh
+$ svn add --force ./*
+```
+
 This will schedule all files that are not tracked by svn to be added to the repo in the next commit.
