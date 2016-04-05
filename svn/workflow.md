@@ -46,8 +46,7 @@ Now reintegrate the branch into the trunk to which you've just switched
 svn merge --reintegrate -x -w -x -b -x --ignore-eol-style http://svn.dafiti.com.mx/upgrade/4.2.0/branches/MXDAFITI-#
 svn revert bob/application/vendor/configs/_crontab
 svn ci -m 'MXDAFITI-#: reintegrated branch BRANCH-DESCRIPTION'
-
-# Committed revision 1234.
+Committed revision 1234.
 
 Google Analytics Notes:'
 If your changes were important modifications (new mobile web launch, IT issues, marketing events), please make notes @ Google Analytics regardignt this big/medium changes. Or ask to someone with access to do it.
