@@ -1,4 +1,4 @@
-Issue Workflow
+#Issue Workflow
 
 Take an issue from Jira, assign it to yourself, set it to 'In Progress'
 Make a branch named after the Jira Issue (e.g. MXDAFITI-1 )
@@ -8,26 +8,34 @@ Then It will be deployed to testing and will be tested
 When the 'definition of done' is fullfilled and the QA has approved the branch, merge it to the trunk
 Then a tag will be created and deployed to staging. A testorder will be placed to verify the build.
 If everything went fine, the tag will be deployed to live and the branch should be deleted.
-The SVN tutorial can be found here:
-Basic merging
-Branch - Merge
-Complete SVN book
 
-Legend
+
+####The SVN tutorial can be found here:
+  * [Basic merging](http://svnbook.red-bean.com/nightly/en/svn.branchmerge.basicmerging.html)
+  * [Branch - Merge](http://svnbook.red-bean.com/nightly/en/svn.branchmerge.html)
+  * [Complete SVN book](http://svnbook.red-bean.com/)
+
+#Legend
 
 [JIRA ISSUE] – name of JIRA issue, e.g. MXDAFITI-1  
 
-Create a new branch
+#Create a new branch
 
 You have to change the actual URL according to the your needs.
 
 4.2 Version
-svn copy http://svn.dafiti.com.mx/upgrade/4.2.0/trunk/  http://svn.dafiti.com.mx/upgrade/4.2.0/branches/MXDAFITI-# -m 'MXDAFITI-#: Created branch from trunk'
-Checkout the new branch
+```sh
+$ svn copy http://svn.dafiti.com.mx/upgrade/4.2.0/trunk/  http://svn.dafiti.com.mx/upgrade/4.2.0/branches/MXDAFITI-# -m 'MXDAFITI-#: Created branch from trunk'
+```
+
+#Checkout the new branch
 
 4.2 Version
-svn co  http://svn.dafiti.com.mx/upgrade/4.2.0/branches/MXDAFITI-#
-Synchronize the local branch with the trunk
+```sh
+$ svn co  http://svn.dafiti.com.mx/upgrade/4.2.0/branches/MXDAFITI-#
+```
+
+#Synchronize the local branch with the trunk
 
 4.2 Version
 svn merge -x -w -x -b -x --ignore-eol-style http://svn.dafiti.com.mx/upgrade/4.2.0/trunk/
